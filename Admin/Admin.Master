@@ -1,0 +1,226 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Admin.master.cs" Inherits="FoodHub.Admin.Admin" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+   <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport" />
+  <title>Backend Panel</title>
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="assets/css/app.min.css" />
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="assets/bundles/datatables/datatables.min.css" />
+  <link rel="stylesheet" href="assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <!-- Custom style CSS -->
+  <link rel="stylesheet" href="assets/css/custom.css" />
+  <link rel='shortcut icon' type='image/x-icon' href='assets/img/favicon.ico' />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+   
+   <div class="loader"></div>
+   <form id="form1" runat="server" class="needs-validation" novalidate="">
+  <div id="app">
+    <div class="main-wrapper main-wrapper-1">
+      <div class="navbar-bg"></div>
+      <nav class="navbar navbar-expand-lg main-navbar sticky">
+        <div class="form-inline mr-auto">
+          <ul class="navbar-nav mr-3">
+            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg collapse-btn"> <i data-feather="align-justify"></i></a></li>
+            <li><a href="#" class="nav-link nav-link-lg fullscreen-btn">
+                <i data-feather="maximize"></i>
+              </a></li>
+      
+          </ul>
+        </div>
+        <ul class="navbar-nav navbar-right">
+          <li class="dropdown"><a href="#" data-toggle="dropdown"
+              class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <asp:Image ID="Image" runat="server" CssClass="user-img-radious-style"   />      
+            <div class="dropdown-menu dropdown-menu-right pullDown">
+             <div class="dropdown-title"><p>Hello<asp:Label ID="lbl_fullname" runat="server" Font-Bold="True"></asp:Label></p></div>
+    
+
+                  <div class="buttons">
+                     <asp:LinkButton ID="LinkButton1"  CssClass="dropdown-item has-icon" OnClick="btn_User_Click" runat="server" data-toggle="modal" data-target="#exampleModal11">Change Password</asp:LinkButton>
+
+                    </div>
+                 <div class="buttons">
+                <asp:LinkButton ID="USER_ID"  CssClass="dropdown-item has-icon" OnClick="btn_User_Click" runat="server">Edit User Profile</asp:LinkButton>
+              </div>
+              <div class="dropdown-divider"></div>
+                <div class="buttons">
+               <asp:Button ID="btn_logout" runat="server" CssClass="dropdown-item has-icon text-danger" OnClientClick="return confirm('Are You Sure!! You want to Log Out?')" Text="Logout" OnClick="btn_logout_Click" />
+                </div>
+
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <div class="main-sidebar sidebar-style-2">
+        <aside id="sidebar-wrapper">
+          <div class="sidebar-brand">
+            <a href="#">  <asp:Image ID="Image1" runat="server" CssClass="header-logo"   />   
+                <span 
+                class="logo-name"><asp:Label ID="lbl_fullname1" runat="server"  Style="font-size:12px"></asp:Label></span>
+            </a>
+          </div>
+          <ul class="sidebar-menu">
+            <li class="menu-header">Main</li>
+            <li class="dropdown">
+              <li class="active">
+              <a href="dashboard.aspx" class="nav-link"><i data-feather="grid"></i><span>Dashboard</span></a>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i
+                  data-feather="shopping-cart"></i><span>Order</span></a>
+                
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="viewOrder.aspx">View Order</a></li>
+                <li><a class="nav-link" href="manageOrder.aspx">Manage Order</a></li>
+              </ul>
+            </li>
+            
+            <li class="menu-header">Administrative Functions</li>
+
+
+            <li class="dropdown">
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="folder"></i><span>Category</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="viewCategory.aspx">View Category</a></li>
+                <li><a class="nav-link" href="manageCategory.aspx">Manage Category</a></li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="box"></i><span>Product</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="viewProduct.aspx">View Product</a></li>
+                <li><a class="nav-link" href="manageProduct.aspx">Manage Product</a></li>
+              </ul>
+            </li>
+
+       
+
+              <li class="menu-header">Users</li>   
+            <li><a class="nav-link" href="user.aspx"><i data-feather="user"></i><span>Users </span></a></li>
+              <li class="menu-header">Feedback</li>
+            <li><a class="nav-link" href="feedback.aspx"><i data-feather="message-circle"></i><span>Feedback </span></a></li>
+            
+          </ul>
+        </aside>
+
+
+      </div>
+        
+    </div>
+  </div>
+      <!-- Main Content -->
+
+
+         <div class="modal fade" id="exampleModal11" tabindex="-1" role="dialog" aria-labelledby="formModal" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="formModal">Change Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                  <div class="form-group">
+                    <label>Old Password</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                          <i class="fa fa-key"></i>
+                        </div>
+                      </div>
+                        <asp:TextBox ID="txtOldPassword" TextMode="Password" CssClass="form-control" runat="server"></asp:TextBox>
+                          <div class="invalid-feedback">
+                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Password is mandatory" ControlToValidate="txtOldPassword" ForeColor="Red" ValidationGroup="signupbtn"></asp:RequiredFieldValidator>
+                            </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label>New Password</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                          <i class="fa fa-lock"></i>
+                        </div>
+                      </div>
+                        <asp:TextBox ID="newPassword" TextMode="Password" CssClass="form-control" runat="server"></asp:TextBox>
+                        <div class="invalid-feedback">
+                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Password is mandatory" ControlToValidate="newPassword" ForeColor="Red" ValidationGroup="signupbtn"></asp:RequiredFieldValidator>
+                            </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Confirm Password</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                          <i class="fa fa-lock"></i>
+                        </div>
+                      </div>
+                        <asp:TextBox ID="ConfirmPassword" TextMode="Password" CssClass="form-control" runat="server"></asp:TextBox>
+                        <asp:CompareValidator ID="CompareValidator1" runat="server" ErrorMessage="Password did not match." ValidationGroup="signupbtn" ControlToValidate="ConfirmPassword" ForeColor="Red" ControlToCompare="newPassword"></asp:CompareValidator>
+                              <div class="invalid-feedback">
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="This field is mandatory." ControlToValidate="ConfirmPassword" ForeColor="Red" ValidationGroup="signupbtn"></asp:RequiredFieldValidator>
+                         </div>
+                    </div>
+                  </div>
+
+
+
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+
+                     <asp:Button runat="server" ID="btn_Signup" PostBackUrl="#" CssClass="btn btn-primary btn-lg btn-block" Text="Signup"  OnClick="ChangePassword_Click" ValidationGroup="signupbtn" />
+                      
+                 
+              </div>
+                  </div>
+
+
+                </div>
+                </div>
+              </div>
+
+
+             <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+
+            </div>
+
+
+
+    </form>
+
+  <script src="assets/js/app.min.js"></script>
+  <!-- JS Libraies -->
+  <script src="assets/bundles/apexcharts/apexcharts.min.js"></script>
+  <!-- Page Specific JS File -->
+  <script src="assets/js/page/index.js"></script>
+  <!-- Template JS File -->
+  <script src="assets/js/scripts.js"></script>
+  <!-- Custom JS File -->
+  <script src="assets/js/custom.js"></script>    
+       <script src="assets/bundles/datatables/datatables.min.js"></script>
+
+  <!-- Page Specific JS File -->
+  <script src="assets/js/page/datatables.js"></script>
+
+ 
+
+</body>
+</html>
